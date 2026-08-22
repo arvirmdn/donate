@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Galang Dana & Donasi Online</title>
+    <title>arvirmdn donate</title>
     <style>
         :root {
             --primary-color: #2563eb;
@@ -39,7 +39,7 @@
             width: 92%;
             max-width: 420px;
             height: 96vh;
-            max-height: 720px;
+            max-height: 740px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             padding: 16px;
@@ -75,7 +75,7 @@
             margin-bottom: 4px;
         }
 
-        /* QRIS Auto Fit */
+        /* QRIS Auto Fit & Download Button */
         .qris-container {
             background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
@@ -91,7 +91,7 @@
         }
 
         .qris-container img {
-            max-height: 25vh;
+            max-height: 22vh;
             max-width: 100%;
             width: auto;
             object-fit: contain;
@@ -100,8 +100,28 @@
             padding: 4px;
         }
 
+        .btn-download-qris {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-top: 6px;
+            padding: 4px 10px;
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-main);
+            font-size: clamp(10px, 2.2vw, 11px);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+
+        .btn-download-qris:hover {
+            background-color: #e2e8f0;
+        }
+
         .qris-subtext {
-            font-size: clamp(9px, 2vw, 11px);
+            font-size: clamp(9px, 2vw, 10px);
             color: var(--text-muted);
             margin-top: 4px;
         }
@@ -196,16 +216,25 @@
 
 <div class="card">
     <div class="header">
-        <h1>Bantu Sesama</h1>
-        <p>Setiap donasi dari Anda sangat berarti bagi kami.</p>
+        <h1>Arvirmdn Donate</h1>
+        <p>Dukungan Anda sangat berarti untuk mendukung program ini.</p>
     </div>
 
     <!-- METODE 1: QRIS -->
-    <div class="section-title">1. Scan QRIS</div>
+    <div class="section-title">1. Scan QRIS (NMID: ID1026472820764)</div>
     <div class="qris-container">
-        <!-- Ganti qris.png dengan gambar QRIS Anda di GitHub -->
-        <img src="qris.png" alt="QRIS Donasi">
-        <div class="qris-subtext">Mendukung GoPay, OVO, DANA, ShopeePay & M-Banking</div>
+        <!-- Simpan gambar QRIS yang Anda unggah sebagai qris.jpg di repositori GitHub -->
+        <img src="qris.jpg" alt="QRIS arvirmdn" id="qris-img">
+        
+        <!-- Tombol Download QRIS -->
+        <a href="qris.jpg" download="QRIS_arvirmdn.jpg" class="btn-download-qris">
+            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Download QRIS
+        </a>
+        
+        <div class="qris-subtext">Mendukung Semua Bank & E-Wallet (GoPay, OVO, DANA, dll)</div>
     </div>
 
     <!-- METODE 2: TRANSFER BANK -->
@@ -215,7 +244,7 @@
         <div class="payment-info">
             <span class="bank-name">Bank BCA</span>
             <span class="account-number" id="bca-num">1234567890</span>
-            <span class="account-holder">a.n. Nama Pemilik</span>
+            <span class="account-holder">a.n. arvirmdn</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('bca-num', this)">Salin</button>
     </div>
@@ -224,7 +253,7 @@
         <div class="payment-info">
             <span class="bank-name">Bank Mandiri</span>
             <span class="account-number" id="mandiri-num">0987654321</span>
-            <span class="account-holder">a.n. Nama Pemilik</span>
+            <span class="account-holder">a.n. arvirmdn</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('mandiri-num', this)">Salin</button>
     </div>
@@ -236,13 +265,13 @@
         <div class="payment-info">
             <span class="bank-name">DANA / GoPay / OVO</span>
             <span class="account-number" id="ewallet-num">081234567890</span>
-            <span class="account-holder">a.n. Nama Pemilik</span>
+            <span class="account-holder">a.n. arvirmdn</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('ewallet-num', this)">Salin</button>
     </div>
 
     <!-- KONFIRMASI WHATSAPP -->
-    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi." 
+    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi%20ke%20arvirmdn." 
        target="_blank" 
        class="btn-wa">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
