@@ -2,12 +2,11 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Galang Dana & Donasi Online</title>
     <style>
         :root {
             --primary-color: #2563eb;
-            --primary-hover: #1d4ed8;
             --bg-color: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
@@ -23,77 +22,88 @@
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
-        body {
+        /* Kunci Layar Agar Tidak Bisa Di-scroll */
+        html, body {
+            height: 100vh;
+            width: 100vw;
+            overflow: hidden;
             background-color: var(--bg-color);
             color: var(--text-main);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
-            padding: 20px;
         }
 
         .card {
             background-color: var(--card-bg);
-            width: 100%;
-            max-width: 500px;
+            width: 92%;
+            max-width: 420px;
+            height: 96vh;
+            max-height: 720px;
             border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-            padding: 28px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            padding: 16px;
             border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .header {
             text-align: center;
-            margin-bottom: 24px;
         }
 
         .header h1 {
-            font-size: 24px;
+            font-size: clamp(18px, 4vw, 22px);
             font-weight: 700;
             color: var(--text-main);
-            margin-bottom: 8px;
+            margin-bottom: 2px;
         }
 
         .header p {
-            font-size: 14px;
+            font-size: clamp(11px, 2.5vw, 13px);
             color: var(--text-muted);
-            line-height: 1.5;
         }
 
         .section-title {
-            font-size: 13px;
+            font-size: clamp(10px, 2.2vw, 11px);
             font-weight: 700;
             text-transform: uppercase;
             letter-spacing: 0.05em;
             color: var(--text-muted);
-            margin: 24px 0 12px 0;
+            margin-top: 6px;
+            margin-bottom: 4px;
         }
 
-        /* QRIS Styling */
+        /* QRIS Auto Fit */
         .qris-container {
             background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
-            border-radius: 12px;
-            padding: 20px;
+            border-radius: 10px;
+            padding: 8px;
             text-align: center;
-            margin-bottom: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 1;
+            min-height: 0;
         }
 
         .qris-container img {
-            max-width: 220px;
-            width: 100%;
-            height: auto;
-            border-radius: 8px;
+            max-height: 25vh;
+            max-width: 100%;
+            width: auto;
+            object-fit: contain;
+            border-radius: 6px;
             background: #fff;
-            padding: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            padding: 4px;
         }
 
         .qris-subtext {
-            font-size: 12px;
+            font-size: clamp(9px, 2vw, 11px);
             color: var(--text-muted);
-            margin-top: 10px;
+            margin-top: 4px;
         }
 
         /* Payment List Item */
@@ -103,14 +113,8 @@
             justify-content: space-between;
             background-color: #f8fafc;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 10px;
-            transition: border-color 0.2s;
-        }
-
-        .payment-item:hover {
-            border-color: #cbd5e1;
+            border-radius: 8px;
+            padding: 6px 12px;
         }
 
         .payment-info {
@@ -119,22 +123,21 @@
         }
 
         .bank-name {
-            font-size: 12px;
+            font-size: clamp(9px, 2vw, 10px);
             font-weight: 600;
             color: var(--text-muted);
             text-transform: uppercase;
         }
 
         .account-number {
-            font-size: 16px;
+            font-size: clamp(13px, 3vw, 15px);
             font-weight: 700;
             color: var(--text-main);
             letter-spacing: 0.5px;
-            margin: 2px 0;
         }
 
         .account-holder {
-            font-size: 12px;
+            font-size: clamp(9px, 2vw, 11px);
             color: var(--text-muted);
         }
 
@@ -143,9 +146,9 @@
             background-color: #ffffff;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 8px 14px;
-            border-radius: 8px;
-            font-size: 13px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            font-size: clamp(10px, 2.2vw, 12px);
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s;
@@ -153,7 +156,6 @@
 
         .btn-copy:hover {
             background-color: #f1f5f9;
-            border-color: #cbd5e1;
         }
 
         .btn-copy.copied {
@@ -162,23 +164,21 @@
             border-color: var(--success-color);
         }
 
-        /* WA Confirmation Button */
+        /* WA Button */
         .btn-wa {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             width: 100%;
             background-color: #25d366;
             color: #ffffff;
             text-decoration: none;
             font-weight: 700;
-            font-size: 15px;
-            padding: 14px;
-            border-radius: 10px;
-            margin-top: 28px;
+            font-size: clamp(12px, 2.8vw, 14px);
+            padding: 10px;
+            border-radius: 8px;
             transition: background-color 0.2s;
-            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.2);
         }
 
         .btn-wa:hover {
@@ -187,9 +187,8 @@
 
         .footer-text {
             text-align: center;
-            font-size: 12px;
+            font-size: clamp(9px, 2vw, 10px);
             color: var(--text-muted);
-            margin-top: 20px;
         }
     </style>
 </head>
@@ -198,15 +197,15 @@
 <div class="card">
     <div class="header">
         <h1>Bantu Sesama</h1>
-        <p>Setiap donasi dari Anda sangat berarti untuk mendukung program kebaikan ini.</p>
+        <p>Setiap donasi dari Anda sangat berarti bagi kami.</p>
     </div>
 
     <!-- METODE 1: QRIS -->
-    <div class="section-title">1. Scan QRIS (Bisa Semua Bank & E-Wallet)</div>
+    <div class="section-title">1. Scan QRIS</div>
     <div class="qris-container">
-        <!-- Ganti qris.png dengan file gambar QRIS Anda di repo github -->
-        <img src="qris.png" alt="QRIS Donasi" id="qris-image">
-        <div class="qris-subtext">Mendukung GoPay, OVO, DANA, ShopeePay, BCA, Mandiri, BRI, dll.</div>
+        <!-- Ganti qris.png dengan gambar QRIS Anda di GitHub -->
+        <img src="qris.png" alt="QRIS Donasi">
+        <div class="qris-subtext">Mendukung GoPay, OVO, DANA, ShopeePay & M-Banking</div>
     </div>
 
     <!-- METODE 2: TRANSFER BANK -->
@@ -216,7 +215,7 @@
         <div class="payment-info">
             <span class="bank-name">Bank BCA</span>
             <span class="account-number" id="bca-num">1234567890</span>
-            <span class="account-holder">a.n. Nama Pemilik Rekening</span>
+            <span class="account-holder">a.n. Nama Pemilik</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('bca-num', this)">Salin</button>
     </div>
@@ -225,36 +224,35 @@
         <div class="payment-info">
             <span class="bank-name">Bank Mandiri</span>
             <span class="account-number" id="mandiri-num">0987654321</span>
-            <span class="account-holder">a.n. Nama Pemilik Rekening</span>
+            <span class="account-holder">a.n. Nama Pemilik</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('mandiri-num', this)">Salin</button>
     </div>
 
     <!-- METODE 3: E-WALLET -->
-    <div class="section-title">3. E-Wallet</div>
+    <div class="section-title">3. E-Wallet Direct</div>
 
     <div class="payment-item">
         <div class="payment-info">
             <span class="bank-name">DANA / GoPay / OVO</span>
             <span class="account-number" id="ewallet-num">081234567890</span>
-            <span class="account-holder">a.n. Nama Pemilik Akun</span>
+            <span class="account-holder">a.n. Nama Pemilik</span>
         </div>
         <button class="btn-copy" onclick="copyToClipboard('ewallet-num', this)">Salin</button>
     </div>
 
     <!-- KONFIRMASI WHATSAPP -->
-    <!-- Ubah 6281234567890 sesuai nomor WA Anda (Gunakan kode negara 62) -->
-    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi.%20Berikut%20bukti%20transfernya:" 
+    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi." 
        target="_blank" 
        class="btn-wa">
-        <svg width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
             <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
         </svg>
         Konfirmasi Donasi via WhatsApp
     </a>
 
     <div class="footer-text">
-        Terima kasih atas kepedulian dan kebaikan Anda.
+        Terima kasih atas kepedulian Anda.
     </div>
 </div>
 
