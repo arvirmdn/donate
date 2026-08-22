@@ -65,6 +65,47 @@
             color: var(--text-muted);
         }
 
+        /* Navigasi Menu Tombol */
+        .menu-tabs {
+            display: flex;
+            gap: 8px;
+            background-color: #f1f5f9;
+            padding: 4px;
+            border-radius: 10px;
+            margin: 10px 0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: none;
+            background: transparent;
+            color: var(--text-muted);
+            font-weight: 600;
+            font-size: clamp(11px, 2.5vw, 13px);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Konten Tab */
+        .tab-content {
+            display: none;
+            flex-direction: column;
+            justify-content: center;
+            flex-grow: 1;
+        }
+
+        .tab-content.active {
+            display: flex;
+        }
+
         .section-title {
             font-size: clamp(10px, 2.2vw, 11px);
             font-weight: 700;
@@ -72,7 +113,7 @@
             letter-spacing: 0.05em;
             color: var(--text-muted);
             margin-top: 6px;
-            margin-bottom: 4px;
+            margin-bottom: 6px;
         }
 
         /* QRIS Box - Ukuran Diperbesar */
@@ -80,18 +121,17 @@
             background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
             border-radius: 10px;
-            padding: 10px;
+            padding: 12px;
             text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            flex-shrink: 1;
-            min-height: 0;
+            flex-grow: 1;
         }
 
         .qris-container img {
-            max-height: 28vh; /* Ukuran gambar QRIS diperbesar */
+            max-height: 32vh;
             max-width: 100%;
             width: auto;
             object-fit: contain;
@@ -103,14 +143,14 @@
         .btn-download-qris {
             display: inline-flex;
             align-items: center;
-            gap: 4px;
-            margin-top: 6px;
-            padding: 5px 12px;
+            gap: 6px;
+            margin-top: 10px;
+            padding: 8px 16px;
             background-color: #ffffff;
             border: 1px solid var(--border-color);
             border-radius: 6px;
             color: var(--text-main);
-            font-size: clamp(10px, 2.2vw, 11px);
+            font-size: clamp(11px, 2.5vw, 12px);
             font-weight: 600;
             cursor: pointer;
             text-decoration: none;
@@ -124,7 +164,7 @@
         .qris-subtext {
             font-size: clamp(9px, 2vw, 10px);
             color: var(--text-muted);
-            margin-top: 4px;
+            margin-top: 6px;
         }
 
         /* Bank / E-Wallet Items */
@@ -135,8 +175,8 @@
             background-color: #f8fafc;
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 6px 12px;
-            margin-bottom: 4px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
         }
 
         .payment-info {
@@ -152,14 +192,14 @@
         }
 
         .account-number {
-            font-size: clamp(12px, 2.8vw, 14px);
+            font-size: clamp(13px, 3vw, 15px);
             font-weight: 700;
             color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .account-holder {
-            font-size: clamp(9px, 2vw, 10px);
+            font-size: clamp(9px, 2vw, 11px);
             color: var(--text-muted);
         }
 
@@ -167,7 +207,7 @@
             background-color: #ffffff;
             border: 1px solid var(--border-color);
             color: var(--text-main);
-            padding: 5px 10px;
+            padding: 6px 12px;
             border-radius: 6px;
             font-size: clamp(10px, 2.2vw, 12px);
             font-weight: 600;
@@ -198,6 +238,7 @@
             font-size: clamp(12px, 2.8vw, 14px);
             padding: 10px;
             border-radius: 8px;
+            margin-top: 8px;
             transition: background-color 0.2s;
         }
 
@@ -209,6 +250,7 @@
             text-align: center;
             font-size: clamp(9px, 2vw, 10px);
             color: var(--text-muted);
+            margin-top: 6px;
         }
     </style>
 </head>
@@ -220,72 +262,93 @@
         <p>Dukungan Anda sangat berarti untuk mendukung program ini.</p>
     </div>
 
-    <!-- METODE 1: QRIS -->
-    <div class="section-title">1. Scan QRIS (NMID: ID1026472820764)</div>
-    <div class="qris-container">
-        <!-- Gambar QRIS yang diperbesar -->
-        <img id="qris-img" src="qris.png" onerror="this.onerror=null; this.src='qris.jpeg'; if(!this.complete) { this.src='qris.jpg'; }" alt="QRIS arvirmdn">
-        
-        <!-- Tombol Download QRIS -->
-        <a id="download-btn" href="qris.png" download="QRIS_arvirmdn.png" class="btn-download-qris">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-            </svg>
-            Download QRIS
-        </a>
-        
-        <div class="qris-subtext">Mendukung Semua Bank & E-Wallet (GoPay, OVO, DANA, dll)</div>
+    <!-- Navigasi Tombol Menu -->
+    <div class="menu-tabs">
+        <button class="tab-btn active" onclick="switchTab('qris-tab', this)">QRIS Menu</button>
+        <button class="tab-btn" onclick="switchTab('tf-tab', this)">Tf Menu</button>
     </div>
 
-    <!-- METODE 2: TRANSFER BANK -->
-    <div class="section-title">2. Transfer Bank</div>
-    
-    <div class="payment-item">
-        <div class="payment-info">
-            <span class="bank-name">Bank SeaBank</span>
-            <span class="account-number" id="seabank-num">901029803056</span>
-            <span class="account-holder">a.n. Muhammad Adika Arvi Rohmadon</span>
+    <!-- TAB 1: QRIS MENU -->
+    <div id="qris-tab" class="tab-content active">
+        <div class="section-title">Scan QRIS (NMID: ID1026472820764)</div>
+        <div class="qris-container">
+            <img id="qris-img" src="qris.png" onerror="this.onerror=null; this.src='qris.jpeg'; if(!this.complete) { this.src='qris.jpg'; }" alt="QRIS arvirmdn">
+            
+            <a id="download-btn" href="qris.png" download="QRIS_arvirmdn.png" class="btn-download-qris">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                </svg>
+                Download QRIS
+            </a>
+            
+            <div class="qris-subtext">Mendukung Semua Bank & E-Wallet (GoPay, OVO, DANA, dll)</div>
         </div>
-        <button class="btn-copy" onclick="copyToClipboard('seabank-num', this)">Salin</button>
     </div>
 
-    <!-- METODE 3: E-WALLET -->
-    <div class="section-title">3. E-Wallet Direct</div>
-
-    <div class="payment-item">
-        <div class="payment-info">
-            <span class="bank-name">DANA</span>
-            <span class="account-number" id="dana-num">085648252688</span>
-            <span class="account-holder">a.n. MUHAMMAD ADIKA ARVI ROHMADON</span>
+    <!-- TAB 2: TF MENU (TRANSFER BANK & E-WALLET) -->
+    <div id="tf-tab" class="tab-content">
+        <div class="section-title">Transfer Bank</div>
+        <div class="payment-item">
+            <div class="payment-info">
+                <span class="bank-name">Bank SeaBank</span>
+                <span class="account-number" id="seabank-num">901029803056</span>
+                <span class="account-holder">a.n. Muhammad Adika Arvi Rohmadon</span>
+            </div>
+            <button class="btn-copy" onclick="copyToClipboard('seabank-num', this)">Salin</button>
         </div>
-        <button class="btn-copy" onclick="copyToClipboard('dana-num', this)">Salin</button>
-    </div>
 
-    <div class="payment-item">
-        <div class="payment-info">
-            <span class="bank-name">ShopeePay</span>
-            <span class="account-number" id="shopeepay-num">083117949780</span>
-            <span class="account-holder">a.n. arviirmdn</span>
+        <div class="section-title">E-Wallet Direct</div>
+        <div class="payment-item">
+            <div class="payment-info">
+                <span class="bank-name">DANA</span>
+                <span class="account-number" id="dana-num">085648252688</span>
+                <span class="account-holder">a.n. MUHAMMAD ADIKA ARVI ROHMADON</span>
+            </div>
+            <button class="btn-copy" onclick="copyToClipboard('dana-num', this)">Salin</button>
         </div>
-        <button class="btn-copy" onclick="copyToClipboard('shopeepay-num', this)">Salin</button>
+
+        <div class="payment-item">
+            <div class="payment-info">
+                <span class="bank-name">ShopeePay</span>
+                <span class="account-number" id="shopeepay-num">083117949780</span>
+                <span class="account-holder">a.n. arviirmdn</span>
+            </div>
+            <button class="btn-copy" onclick="copyToClipboard('shopeepay-num', this)">Salin</button>
+        </div>
     </div>
 
     <!-- KONFIRMASI WHATSAPP -->
-    <a href="https://wa.me/6285648252688?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi%20ke%20arvirmdn." 
-       target="_blank" 
-       class="btn-wa">
-        <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
-            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
-        </svg>
-        Konfirmasi Donasi via WhatsApp
-    </a>
+    <div>
+        <a href="https://wa.me/6285648252688?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi%20ke%20arvirmdn." 
+           target="_blank" 
+           class="btn-wa">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/>
+            </svg>
+            Konfirmasi Donasi via WhatsApp
+        </a>
 
-    <div class="footer-text">
-        Terima kasih atas kepedulian Anda.
+        <div class="footer-text">
+            Terima kasih atas kepedulian Anda.
+        </div>
     </div>
 </div>
 
 <script>
+    function switchTab(tabId, btn) {
+        // Sembunyikan semua tab content
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+
+        // Nonaktifkan semua button tab
+        const buttons = document.querySelectorAll('.tab-btn');
+        buttons.forEach(button => button.classList.remove('active'));
+
+        // Tampilkan tab yang dipilih & aktifkan buttonnya
+        document.getElementById(tabId).classList.add('active');
+        btn.classList.add('active');
+    }
+
     function copyToClipboard(elementId, button) {
         const textToCopy = document.getElementById(elementId).innerText;
         
