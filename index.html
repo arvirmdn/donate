@@ -39,7 +39,7 @@
             width: 92%;
             max-width: 420px;
             height: 96vh;
-            max-height: 740px;
+            max-height: 760px;
             border-radius: 16px;
             box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
             padding: 16px;
@@ -75,12 +75,12 @@
             margin-bottom: 4px;
         }
 
-        /* QRIS Box */
+        /* QRIS Box - Ukuran Diperbesar */
         .qris-container {
             background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
             border-radius: 10px;
-            padding: 8px;
+            padding: 10px;
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -91,7 +91,7 @@
         }
 
         .qris-container img {
-            max-height: 22vh;
+            max-height: 28vh; /* Ukuran gambar QRIS diperbesar */
             max-width: 100%;
             width: auto;
             object-fit: contain;
@@ -136,6 +136,7 @@
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 6px 12px;
+            margin-bottom: 4px;
         }
 
         .payment-info {
@@ -151,14 +152,14 @@
         }
 
         .account-number {
-            font-size: clamp(13px, 3vw, 15px);
+            font-size: clamp(12px, 2.8vw, 14px);
             font-weight: 700;
             color: var(--text-main);
             letter-spacing: 0.5px;
         }
 
         .account-holder {
-            font-size: clamp(9px, 2vw, 11px);
+            font-size: clamp(9px, 2vw, 10px);
             color: var(--text-muted);
         }
 
@@ -222,7 +223,7 @@
     <!-- METODE 1: QRIS -->
     <div class="section-title">1. Scan QRIS (NMID: ID1026472820764)</div>
     <div class="qris-container">
-        <!-- Gambar QRIS asli Anda (di-embed langsung) -->
+        <!-- Gambar QRIS yang diperbesar -->
         <img id="qris-img" src="qris.png" onerror="this.onerror=null; this.src='qris.jpeg'; if(!this.complete) { this.src='qris.jpg'; }" alt="QRIS arvirmdn">
         
         <!-- Tombol Download QRIS -->
@@ -241,20 +242,11 @@
     
     <div class="payment-item">
         <div class="payment-info">
-            <span class="bank-name">Bank BCA</span>
-            <span class="account-number" id="bca-num">1234567890</span>
-            <span class="account-holder">a.n. arvirmdn</span>
+            <span class="bank-name">Bank SeaBank</span>
+            <span class="account-number" id="seabank-num">901029803056</span>
+            <span class="account-holder">a.n. Muhammad Adika Arvi Rohmadon</span>
         </div>
-        <button class="btn-copy" onclick="copyToClipboard('bca-num', this)">Salin</button>
-    </div>
-
-    <div class="payment-item">
-        <div class="payment-info">
-            <span class="bank-name">Bank Mandiri</span>
-            <span class="account-number" id="mandiri-num">0987654321</span>
-            <span class="account-holder">a.n. arvirmdn</span>
-        </div>
-        <button class="btn-copy" onclick="copyToClipboard('mandiri-num', this)">Salin</button>
+        <button class="btn-copy" onclick="copyToClipboard('seabank-num', this)">Salin</button>
     </div>
 
     <!-- METODE 3: E-WALLET -->
@@ -262,15 +254,24 @@
 
     <div class="payment-item">
         <div class="payment-info">
-            <span class="bank-name">DANA / GoPay / OVO</span>
-            <span class="account-number" id="ewallet-num">081234567890</span>
-            <span class="account-holder">a.n. arvirmdn</span>
+            <span class="bank-name">DANA</span>
+            <span class="account-number" id="dana-num">085648252688</span>
+            <span class="account-holder">a.n. MUHAMMAD ADIKA ARVI ROHMADON</span>
         </div>
-        <button class="btn-copy" onclick="copyToClipboard('ewallet-num', this)">Salin</button>
+        <button class="btn-copy" onclick="copyToClipboard('dana-num', this)">Salin</button>
+    </div>
+
+    <div class="payment-item">
+        <div class="payment-info">
+            <span class="bank-name">ShopeePay</span>
+            <span class="account-number" id="shopeepay-num">083117949780</span>
+            <span class="account-holder">a.n. arviirmdn</span>
+        </div>
+        <button class="btn-copy" onclick="copyToClipboard('shopeepay-num', this)">Salin</button>
     </div>
 
     <!-- KONFIRMASI WHATSAPP -->
-    <a href="https://wa.me/6281234567890?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi%20ke%20arvirmdn." 
+    <a href="https://wa.me/6285648252688?text=Halo%20Admin,%20saya%20sudah%20melakukan%20donasi%20ke%20arvirmdn." 
        target="_blank" 
        class="btn-wa">
         <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
@@ -302,7 +303,6 @@
         });
     }
 
-    // Auto deteksi nama file gambar QRIS jika pengguna menamai qris.jpg/jpeg di repo
     const imgElement = document.getElementById('qris-img');
     const btnElement = document.getElementById('download-btn');
 
