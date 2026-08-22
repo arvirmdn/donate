@@ -75,7 +75,7 @@
             margin-bottom: 4px;
         }
 
-        /* QRIS & Button Download */
+        /* QRIS Box */
         .qris-container {
             background-color: #f1f5f9;
             border: 2px dashed #cbd5e1;
@@ -113,6 +113,7 @@
             font-size: clamp(10px, 2.2vw, 11px);
             font-weight: 600;
             cursor: pointer;
+            text-decoration: none;
             transition: all 0.2s;
         }
 
@@ -126,7 +127,7 @@
             margin-top: 4px;
         }
 
-        /* List Rekening */
+        /* Bank / E-Wallet Items */
         .payment-item {
             display: flex;
             align-items: center;
@@ -161,7 +162,6 @@
             color: var(--text-muted);
         }
 
-        /* Tombol Salin */
         .btn-copy {
             background-color: #ffffff;
             border: 1px solid var(--border-color);
@@ -184,7 +184,6 @@
             border-color: var(--success-color);
         }
 
-        /* Tombol WhatsApp */
         .btn-wa {
             display: flex;
             align-items: center;
@@ -223,16 +222,16 @@
     <!-- METODE 1: QRIS -->
     <div class="section-title">1. Scan QRIS (NMID: ID1026472820764)</div>
     <div class="qris-container">
-        <!-- Mengambil file eksternal qris.png -->
-        <img src="qris.png" alt="QRIS arvirmdn" id="qris-image">
+        <!-- Gambar QRIS asli Anda (di-embed langsung) -->
+        <img id="qris-img" src="qris.png" onerror="this.onerror=null; this.src='qris.jpeg'; if(!this.complete) { this.src='qris.jpg'; }" alt="QRIS arvirmdn">
         
-        <!-- Tombol Download File Eksternal -->
-        <button class="btn-download-qris" onclick="downloadImage('qris.png', 'QRIS_arvirmdn.png')">
+        <!-- Tombol Download QRIS -->
+        <a id="download-btn" href="qris.png" download="QRIS_arvirmdn.png" class="btn-download-qris">
             <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
                 <path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
             </svg>
             Download QRIS
-        </button>
+        </a>
         
         <div class="qris-subtext">Mendukung Semua Bank & E-Wallet (GoPay, OVO, DANA, dll)</div>
     </div>
@@ -303,22 +302,13 @@
         });
     }
 
-    function downloadImage(url, filename) {
-        fetch(url)
-            .then(response => response.blob())
-            .then(blob => {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = filename;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            })
-            .catch(error => {
-                console.error('Error saat mengunduh gambar:', error);
-                window.open(url, '_blank');
-            });
-    }
+    // Auto deteksi nama file gambar QRIS jika pengguna menamai qris.jpg/jpeg di repo
+    const imgElement = document.getElementById('qris-img');
+    const btnElement = document.getElementById('download-btn');
+
+    imgElement.addEventListener('load', function() {
+        btnElement.href = imgElement.src;
+    });
 </script>
 
 </body>
